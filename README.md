@@ -4,7 +4,7 @@
 
 ## 🌐 Live Demo
 
-- **Live:** https://ucs503p-202526odd-group6.vercel.app
+- **Live:** https://frontend-two-sigma-33.vercel.app
 - **GitHub:** https://github.com/tripatgarg/Hire
 
 ## ✨ Features
