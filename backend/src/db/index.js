@@ -1,18 +1,24 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
 
-
 const connectDB = async () => {
     try {
+        if (mongoose.connection.readyState >= 1) {
+            return;
+        }
+        if (!process.env.MONGO_URI) {
+            console.error("MONGO_URI environment variable is missing!");
+            return;
+        }
         const db_address = process.env.MONGO_URI.endsWith("/")
             ? `${process.env.MONGO_URI}${DB_NAME}`
             : `${process.env.MONGO_URI}/${DB_NAME}`; 
-        const connectionInstance = await mongoose.connect(db_address)
+        const connectionInstance = await mongoose.connect(db_address);
         console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
     } catch (error) {
         console.log("MONGODB connection FAILED ", error);
-        process.exit(1)
+        throw error;
     }
 }
 
-export default connectDB
+export default connectDB;
